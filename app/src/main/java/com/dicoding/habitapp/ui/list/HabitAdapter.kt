@@ -1,5 +1,6 @@
 package com.dicoding.habitapp.ui.list
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -16,17 +17,21 @@ class HabitAdapter(
 
     //TODO 8 : Create and initialize ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder {
-        throw NotImplementedError("Not yet implemented")
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.habit_item, parent, false)
+        return HabitViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: HabitViewHolder, position: Int) {
         //TODO 9 : Get data and bind them to ViewHolder
+        getItem(position)?.let {
+            holder.bind(it)
+        }
     }
 
     inner class HabitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val tvTitle: TextView = itemView.findViewById(R.id.item_tv_title)
-        val ivPriority: ImageView = itemView.findViewById(R.id.item_priority_level)
+        private val ivPriority: ImageView = itemView.findViewById(R.id.item_priority_level)
         private val tvStartTime: TextView = itemView.findViewById(R.id.item_tv_start_time)
         private val tvMinutes: TextView = itemView.findViewById(R.id.item_tv_minutes)
 
@@ -36,11 +41,17 @@ class HabitAdapter(
             tvTitle.text = habit.title
             tvStartTime.text = habit.startTime
             tvMinutes.text = habit.minutesFocus.toString()
+
+            when (getHabit.priorityLevel) {
+                "High" -> ivPriority.setImageResource(R.drawable.ic_priority_high)
+                "Medium" -> ivPriority.setImageResource(R.drawable.ic_priority_medium)
+                "Low" -> ivPriority.setImageResource(R.drawable.ic_priority_low)
+            }
+
             itemView.setOnClickListener {
                 onClick(habit)
             }
         }
-
     }
 
     companion object {
