@@ -49,12 +49,13 @@ class RandomHabitAdapter(
             itemView.findViewById<TextView>(R.id.pager_tv_start_time).text = pageData.startTime
             itemView.findViewById<TextView>(R.id.pager_tv_minutes).text = pageData.minutesFocus.toString()
 
-            itemView.findViewById<ImageView>(R.id.item_priority_level)
-                .setImageResource(when(pageType) {
-                    PageType.HIGH -> R.drawable.ic_priority_high
-                    PageType.MEDIUM -> R.drawable.ic_priority_medium
-                    PageType.LOW -> R.drawable.ic_priority_low
-                })
+            val pagerIvPriorityLevel = itemView.findViewById<ImageView>(R.id.pager_priority_level)
+
+            when (pageType) {
+                PageType.HIGH -> pagerIvPriorityLevel.setImageResource(R.drawable.ic_priority_high)
+                PageType.MEDIUM -> pagerIvPriorityLevel.setImageResource(R.drawable.ic_priority_medium)
+                PageType.LOW -> pagerIvPriorityLevel.setImageResource(R.drawable.ic_priority_low)
+            }
 
             itemView.findViewById<Button>(R.id.btn_open_count_down)
                 .setOnClickListener { onClick(pageData) }
