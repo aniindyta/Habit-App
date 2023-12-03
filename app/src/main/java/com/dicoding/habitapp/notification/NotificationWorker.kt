@@ -10,7 +10,7 @@ import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.dicoding.habitapp.R
-import com.dicoding.habitapp.ui.add.AddHabitActivity
+import com.dicoding.habitapp.ui.detail.DetailHabitActivity
 import com.dicoding.habitapp.utils.HABIT_ID
 import com.dicoding.habitapp.utils.HABIT_TITLE
 import com.dicoding.habitapp.utils.NOTIFICATION_CHANNEL_ID
@@ -37,8 +37,8 @@ class NotificationWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, p
                     setContentTitle(habitTitle)
                     setContentText(applicationContext.getString(R.string.notify_content))
 
-                    val intent = Intent(applicationContext, AddHabitActivity::class.java)
-                    intent.putExtra(HABIT_ID, habitId) // Pass the habit ID to the AddHabitActivity
+                    val intent = Intent(applicationContext, DetailHabitActivity::class.java)
+                    intent.putExtra(HABIT_ID, habitId)
                     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
                     val pendingIntent = PendingIntent.getActivity(
                         applicationContext,
