@@ -31,8 +31,7 @@ abstract class HabitDatabase : RoomDatabase() {
                     context.applicationContext,
                     HabitDatabase::class.java,
                     "habits.db"
-                )
-                    .fallbackToDestructiveMigration()
+                ).fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
