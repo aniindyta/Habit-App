@@ -57,10 +57,13 @@ class CountDownActivity : AppCompatActivity() {
 
             findViewById<Button>(R.id.btn_start).setOnClickListener {
                 viewModel.startTimer()
+                updateButtonState(true)
             }
 
             findViewById<Button>(R.id.btn_stop).setOnClickListener {
                 viewModel.resetTimer()
+                updateButtonState(false)
+                WorkManager.getInstance(this).cancelAllWork()
             }
         }
 
